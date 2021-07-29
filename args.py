@@ -1,4 +1,4 @@
-# Script originally created by Codam student mraasveldt
+# Script originally created by Codam student mraasvel
 
 import random
 import time
