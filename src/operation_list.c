@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   operation_list.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/06 13:52:53 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/06 13:59:40 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "operations.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
+t_strint	*operation_list(void)
+{
+	static t_strint	oplist[OP_COUNT] =
+	{
+		{OP_SA, "sa"},
+		{OP_SB, "sb"},
+		{OP_SS, "ss"},
+		{OP_PA, "pa"},
+		{OP_PB, "pb"},
+		{OP_RA, "ra"},
+		{OP_RB, "rb"},
+		{OP_RR, "rr"},
+		{OP_RRA, "rra"},
+		{OP_RRB, "rrb"},
+		{OP_RRR, "rrr"}
+	};
 
-#endif
+	return (oplist);
+}

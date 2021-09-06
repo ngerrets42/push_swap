@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_lstsize.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:40:05 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/05/29 15:59:51 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "list.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
+int	ft_lstsize(t_list *lst)
+{
+	size_t	count;
+	t_list	*current;
 
-#endif
+	if (lst == NULL)
+		return (0);
+	count = 1;
+	current = lst;
+	while (current->next != NULL)
+	{
+		count++;
+		current = (t_list *)current->next;
+	}
+	return (count);
+}

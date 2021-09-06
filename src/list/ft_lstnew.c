@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_lstnew.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:39:10 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/05/29 15:59:41 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "list.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*element;
 
-#endif
+	element = (t_list *)malloc(sizeof(t_list));
+	if (element == NULL)
+		return (NULL);
+	element->content = content;
+	element->next = NULL;
+	return (element);
+}

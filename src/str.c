@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   str.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/06 14:01:15 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/06 14:01:23 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "str.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
+int	str_is_str(const char *str1, const char *str2)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (str1[i] == str2[i])
+	{
+		if (str1[i] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}

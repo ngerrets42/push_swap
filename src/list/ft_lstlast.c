@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_lstlast.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:40:32 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/05/29 15:59:31 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "list.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
-
-#endif
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}

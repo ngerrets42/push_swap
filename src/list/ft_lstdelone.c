@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_lstdelone.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:41:42 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/05/29 15:59:21 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "list.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
-
-#endif
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (lst != NULL)
+	{
+		del(lst->content);
+		free(lst);
+	}
+}

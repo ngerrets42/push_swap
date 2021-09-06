@@ -6,14 +6,14 @@
 #    By: ngerrets <ngerrets@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/07/15 14:47:03 by ngerrets      #+#    #+#                  #
-#    Updated: 2021/08/02 12:41:24 by ngerrets      ########   odam.nl          #
+#    Updated: 2021/09/06 14:20:30 by ngerrets      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # For now this is the default Makefile I use for C projects
 # Manually edit:
 NAME := push_swap
-COMPILE_FLAGS ?= -Wall -Wextra
+COMPILE_FLAGS ?= -Wall -Wextra -Werror
 LINKING_FLAGS ?=
 LIBRARIES ?=
 SOURCE_DIRECTORY ?= src
@@ -49,9 +49,12 @@ $(OBJECTS_DIRECTORY)/%.o: %.c $(HEADERS)
 	@$(CC) $(COMPILE_FLAGS) $(INCLUDES) -c -o $@ $<
 
 # Clean objects
-clean:
+clean: cleandeps
 	@rm -Rf $(OBJECTS_DIRECTORY)
 	@echo "Objects cleaned."
+
+cleandeps:
+	$(MAKE) -C lib/get_next_line clean
 
 # Clean objects and binaries
 fclean: clean
@@ -70,8 +73,9 @@ run: all
 print:
 	@echo "---HEADERS: $(HEADERS)" | xargs -n1
 	@echo "---SOURCES: $(SOURCES)" | xargs -n1
+	@echo "---OBJECTS: $(OBJECTS)" | xargs -n1
 
 # In case of bonus
-bonus: all
+bonus: re
 
-.PHONY: all clean fclean re run print compile bonus
+.PHONY: all clean fclean re run print cleandeps dependencies bonus

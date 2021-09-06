@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_lstadd_front.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:39:29 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/06/23 14:10:42 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "list.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
-
-#endif
+void	ft_lstadd_front(t_list **lst, t_list *element)
+{
+	if (lst != NULL && element != NULL)
+		element->next = *lst;
+	*lst = element;
+}

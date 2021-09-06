@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_lstadd_back.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:01:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:40:54 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/06/23 14:11:05 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "list.h"
 
-int	ft_atoi(const char *str);
-int	str_is_str(const char *str1, const char *str2);
+void	ft_lstadd_back(t_list **lst, t_list *element)
+{
+	t_list	*last;
 
-#endif
+	if (lst == NULL)
+		return ;
+	last = ft_lstlast(*lst);
+	if (last != NULL)
+		last->next = element;
+	else
+		*lst = element;
+}
