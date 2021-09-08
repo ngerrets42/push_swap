@@ -6,53 +6,55 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/06 14:08:55 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/08 12:29:52 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "nerror.h"
 #include "operations.h"
-#include "list.h"
+#include "ilist.h"
 #include <unistd.h>
 #include "str.h"
+#include "../../lib/get_next_line/get_next_line.h"
 
 static t_operation	operation_from_str(char *str)
 {
-	static t_strint	*oplist = NULL;
-	int				i;
+	char			**oplist;
+	t_operation		i;
 
-	if (!oplist)
-		oplist = operation_list();
+	oplist = operation_list();
 	i = 0;
 	while (i < OP_COUNT)
 	{
-		if (str_is_str(str, oplist[i].str))
-			return ((t_operation)oplist[i].i);
+		if (str_is_str(str, oplist[i]))
+			return (i);
+		i++;
 	}
 	return (OP_COUNT);
 }
 
-static t_list	*next_operation(void)
+static t_ilist	*next_operation(void)
 {
-	static int	index = 0;
-	static char	buffer[4];
 	t_operation	operation;
+	char		*line;
+	int			retv;
 
-	operation = OP_COUNT;
-	while (read(STDIN_FILENO, buffer, 1) > 0 && buffer[0] == ' ')
-		;
-	buffer[1] = read(STDIN_FILENO, &(buffer[1]), 2);
-	if (buffer[0] && buffer[1] && buffer[2])
-		operation = operation_from_str(buffer);
-	buffer[3] = '\0';
-	if (operation != OP_COUNT)
-		return (ft_lstnew(&operation));
-	return (NULL);
+	retv = get_next_line(0, &line);
+	if (retv == -1)
+		error(ERR_GNL);
+	if (line[0] == '\0')
+		return (NULL);
+	line = str_trim_spaces(line);
+	operation = operation_from_str(line);
+	if (operation == OP_COUNT)
+		error(ERR_UNKNOWN_OPERATION);
+	return (ilst_new(operation));
 }
 
-static t_list	*get_operations(void)
+static t_ilist	*get_operations(void)
 {
-	t_list	*head;
-	t_list	*current;
+	t_ilist	*head;
+	t_ilist	*current;
 
 	head = next_operation();
 	current = head;
@@ -66,13 +68,13 @@ static t_list	*get_operations(void)
 
 int	main(int argc, char **argv)
 {
-	t_list	*operations;
+	t_ilist	*operations;
 
 	operations = get_operations();
-
 	while (operations != NULL)
 	{
-		printf("%d\n", *(int *)(operations->content));
+		printf("%d\n", operations->i);
 		operations = operations->next;
 	}
+	return (0);
 }

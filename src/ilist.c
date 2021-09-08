@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   operation_list.c                                   :+:    :+:            */
+/*   ilist.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/06 13:52:53 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 11:42:28 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/08 12:20:45 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/08 12:22:02 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "ilist.h"
 
-char	**operation_list(void)
+t_ilist	*ilst_new(int content)
 {
-	static char	*oplist[OP_COUNT] =
-	{
-		[OP_SA] = "sa",
-		[OP_SB] = "sb",
-		[OP_SS] = "ss",
-		[OP_PA] = "pa",
-		[OP_PB] = "pb",
-		[OP_RA] = "ra",
-		[OP_RB] = "rb",
-		[OP_RR] = "rr",
-		[OP_RRA] = "rra",
-		[OP_RRB] = "rrb",
-		[OP_RRR] = "rrr"
-	};
+	t_ilist	*element;
 
-	return (oplist);
+	element = (t_ilist *)malloc(sizeof(t_ilist));
+	if (element == NULL)
+		return (NULL);
+	element->i = content;
+	element->next = NULL;
+	return (element);
 }
+
