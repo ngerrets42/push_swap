@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 18:19:58 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/08 18:23:02 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 	program->b = stack_create(program->count);
 	operations = checker_operations_get();
 	checker_operations_perform(operations);
-	if (stack_issorted(program->a) == 1)// && program->b->top == 0)
+	if (stack_issorted(program->a) == 1 && program->b->top < 0)
 		printf("OK!");
 	else
 		printf("KO!");
