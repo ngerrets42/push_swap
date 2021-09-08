@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   nerror.h                                           :+:    :+:            */
+/*   parse_stack.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/08 11:24:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 17:39:45 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/08 17:37:03 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NERROR_H
-# define NERROR_H
+#include "parse.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-
-typedef enum e_error
+t_stack	*stack_from_argv(int argc, char **argv)
 {
-	ERR_MALLOC = 0,
-	ERR_GNL,
-	ERR_UNKNOWN_OPERATION,
-	ERR_STACK_SIZE_ZERO,
-	ERR_DEFAULT
-}	t_error;
-
-void	error(t_error err);
-
-#endif
+	t_stack	*stack;
+	int		i;
+	
+	stack = stack_create(argc - 1);
+	i = 1;
+	while (i < argc)
+	{
+		stack_push(stack, ft_atoi(argv[i]));
+		i++;
+	}
+	return (stack);
+}

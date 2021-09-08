@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 13:52:53 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 11:42:28 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/08 18:05:12 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,24 @@ char	**operation_list(void)
 	};
 
 	return (oplist);
+}
+
+void	*operation_get_function(t_operation operation)
+{
+	static void	*oplist[OP_COUNT] =
+	{
+		[OP_SA] = operation_sa,
+		[OP_SB] = operation_sb,
+		[OP_SS] = operation_ss,
+		[OP_PA] = operation_pa,
+		[OP_PB] = operation_pb,
+		[OP_RA] = operation_ra,
+		[OP_RB] = operation_rb,
+		[OP_RR] = operation_rr,
+		[OP_RRA] = operation_rra,
+		[OP_RRB] = operation_rrb,
+		[OP_RRR] = operation_rrr
+	};
+
+	return (oplist[operation]);
 }

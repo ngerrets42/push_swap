@@ -6,13 +6,14 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:06:39 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/07/15 17:50:57 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/08 18:20:36 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include "nerror.h"
 
 /*
 **	Create a stack with size
@@ -22,17 +23,17 @@ t_stack	*stack_create(int size)
 	t_stack	*stack;
 
 	if (size <= 0)
-		return (NULL);
+		error(ERR_STACK_SIZE_ZERO);
 	stack = malloc(sizeof(t_stack));
 	if (stack == NULL)
-		return (NULL);
+		error(ERR_MALLOC);
 	stack->size = size;
 	stack->top = -1;
 	stack->numbers = malloc(sizeof(int) * size);
 	if (stack->numbers == NULL)
 	{
 		free(stack);
-		return (NULL);
+		error(ERR_MALLOC);
 	}
 	return (stack);
 }
@@ -73,4 +74,20 @@ int	stack_pop(t_stack *stack)
 		return (0);
 	(stack->top)--;
 	return (stack->numbers[stack->top + 1]);
+}
+
+int	stack_issorted(t_stack *stack)
+{
+	int	i;
+
+	if (stack->size <= 1)
+		return (1);
+	i = 1;
+	while (i < stack->size)
+	{
+		if (stack->numbers[i - 1] < stack->numbers[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

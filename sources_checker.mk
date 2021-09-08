@@ -1,4 +1,5 @@
-SOURCES_CHECKER :=	src/checker/main_checker.c \
+SOURCES_CHECKER :=	src/checker/checker.c \
+	src/checker/main_checker.c \
 	src/ft_atoi.c \
 	src/ilist.c \
 	src/list/ft_lstadd_back.c \
@@ -13,6 +14,10 @@ SOURCES_CHECKER :=	src/checker/main_checker.c \
 	src/nerror.c \
 	src/operation_list.c \
 	src/operations1.c \
-	src/sort.c \
+	src/operations2.c \
+	src/operations3.c \
+	src/parsing/parse_stack.c \
+	src/program.c \
 	src/stack.c \
-	src/str.c \
+	src/stack_operations.c \
+	src/str.c

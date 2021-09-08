@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 12:19:31 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 12:23:43 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/08 16:01:48 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ILIST_H
 
 # include <stddef.h>
+# include <stdlib.h>
 
 typedef struct s_ilist
 {

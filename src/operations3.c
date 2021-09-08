@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   nerror.h                                           :+:    :+:            */
+/*   operations3.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/08 11:24:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 17:39:45 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/08 17:50:16 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/08 17:59:40 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NERROR_H
-# define NERROR_H
+#include "operations.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-
-typedef enum e_error
+void	operation_rrr(t_program *program)
 {
-	ERR_MALLOC = 0,
-	ERR_GNL,
-	ERR_UNKNOWN_OPERATION,
-	ERR_STACK_SIZE_ZERO,
-	ERR_DEFAULT
-}	t_error;
-
-void	error(t_error err);
-
-#endif
+	stack_rotate_reverse(program->a);
+	stack_rotate_reverse(program->b);
+}

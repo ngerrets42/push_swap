@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   nerror.h                                           :+:    :+:            */
+/*   program.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/08 11:24:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 17:39:45 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/08 17:18:04 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/08 17:28:31 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NERROR_H
-# define NERROR_H
+#ifndef PROGRAM_H
+# define PROGRAM_H
 
-# include <stdio.h>
+# include "stack.h"
+# include "nerror.h"
+# include <stddef.h>
 # include <stdlib.h>
 
-typedef enum e_error
+typedef struct s_program
 {
-	ERR_MALLOC = 0,
-	ERR_GNL,
-	ERR_UNKNOWN_OPERATION,
-	ERR_STACK_SIZE_ZERO,
-	ERR_DEFAULT
-}	t_error;
+	size_t	count;
+	t_stack	*a;
+	t_stack	*b;
+}			t_program;
 
-void	error(t_error err);
+t_program	*program_get(void);
 
 #endif
