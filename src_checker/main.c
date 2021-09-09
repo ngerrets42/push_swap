@@ -6,13 +6,12 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 11:19:52 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 11:51:19 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "program.h"
-#include "parse.h"
 
 void	debug_print_ilist(t_ilist *lst)
 {

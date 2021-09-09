@@ -12,5 +12,6 @@ SOURCES_CHECKER :=	src_checker/checker.c \
 	src/sort.c \
 	src/sort_functions.c \
 	src/stack.c \
+	src/stack_get.c \
 	src/stack_operations.c \
 	src/str.c \

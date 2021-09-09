@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sort.h                                             :+:    :+:            */
+/*   stack_get.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:23:39 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 12:20:53 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/09 11:42:07 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/09 11:49:36 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SORT_H
-# define SORT_H
+#include "stack.h"
 
-# include "ilist.h"
-# include "program.h"
-# include "operations.h"
+int	stack_isempty(t_stack *stack)
+{
+	return (stack->top == -1);
+}
 
-t_ilist	*sort(void);
-void	sort_perform_operation(t_program *program, t_ilist **operations, t_operation op);
+int	stack_get_top(t_stack *stack)
+{
+	return (stack->numbers[stack->top]);
+}
 
-#endif
+int	stack_get_bottom(t_stack *stack)
+{
+	return (stack->numbers[0]);
+}
+
+int	stack_get_second(t_stack *stack)
+{
+	return (stack->numbers[stack->top - 1]);
+}

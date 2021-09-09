@@ -11,5 +11,6 @@ SOURCES :=	src_pushswap/main.c \
 	src/sort.c \
 	src/sort_functions.c \
 	src/stack.c \
+	src/stack_get.c \
 	src/stack_operations.c \
 	src/str.c \

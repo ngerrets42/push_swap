@@ -6,13 +6,13 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:17:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 11:36:52 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 12:20:53 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-void	sort_perform_operaton(t_program *program, t_ilist **operations, t_operation op)
+void	sort_perform_operation(t_program *program, t_ilist **operations, t_operation op)
 {
 	void		(*func)(t_program *);
 	t_ilist		*new;
