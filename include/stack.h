@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:02:49 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 18:17:09 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 11:38:53 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void	stack_swap(t_stack *stack);
 void	stack_pushto(t_stack *from, t_stack *to);
 void	stack_rotate(t_stack *stack);
 void	stack_rotate_reverse(t_stack *stack);
+
+t_stack	*stack_from_argv(int argc, char **argv);
 
 #endif

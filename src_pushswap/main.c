@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_checker.c                                     :+:    :+:            */
+/*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 18:23:02 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/09 11:37:07 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include <stdio.h>
 #include "program.h"
 #include "parse.h"
-
-void	debug_print_ilist(t_ilist *lst)
-{
-	while (lst != NULL)
-	{
-		printf("%d\n", lst->i);
-		lst = lst->next;
-	}
-}
+#include "operations.h"
+#include "ilist.h"
+#include "sort.h"
 
 static void	stack_print(t_stack *stack)
 {
@@ -37,27 +31,39 @@ static void	stack_print(t_stack *stack)
 	printf("------\n");
 }
 
+static void	operations_print(t_ilist *operations)
+{
+	char		**oplist;
+	t_operation	op;
+
+	oplist = operation_list();
+	while (operations != NULL)
+	{
+		op = (t_operation)operations->i;
+		printf("%s\n", oplist[op]);
+		operations = operations->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	t_ilist		*operations;
 	t_program	*program;
+	t_ilist		*operations;
 
-	if (argc == 1)
+	if (argc <= 1)
 	{
-		printf("OK!\n");
+		printf("\n");
 		return (0);
 	}
 	program = program_get();
 	program->count = argc - 1;
 	program->a = stack_from_argv(argc, argv);
 	program->b = stack_create(program->count);
-	operations = checker_operations_get();
-	checker_operations_perform(operations);
-	if (stack_issorted(program->a) == 1 && program->b->top < 0)
-		printf("OK!");
-	else
-		printf("KO!");
-	printf("\n");
+	operations = sort();
+	operations_print(operations);
+	//DEBUG
 	stack_print(program->a);
+	//---
+	program_free();
 	return (0);
 }

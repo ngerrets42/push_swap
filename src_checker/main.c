@@ -5,16 +5,23 @@
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 18:09:55 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/09 11:19:52 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "checker.h"
+#include "program.h"
 #include "parse.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "str.h"
+
+void	debug_print_ilist(t_ilist *lst)
+{
+	while (lst != NULL)
+	{
+		printf("%d\n", lst->i);
+		lst = lst->next;
+	}
+}
 
 static void	stack_print(t_stack *stack)
 {
@@ -32,25 +39,28 @@ static void	stack_print(t_stack *stack)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_ilist		*operations;
+	t_program	*program;
 
-	printf("%d\n", argc - 1);
-
-	a = stack_from_argv(argc, argv);
-	b = stack_create(a->size);
-
-	stack_print(a);
-	printf("%d\n", a->size);
-
-	int ops = 0;
-
-	//operation_rotate(a);
-
-	stack_print(a);
-	stack_print(b);
-	printf("OPERATIONS: %d\n", ops);
-	stack_destroy(a);
-	stack_destroy(b);
+	if (argc == 1)
+	{
+		printf("OK!\n");
+		return (0);
+	}
+	program = program_get();
+	program->count = argc - 1;
+	program->a = stack_from_argv(argc, argv);
+	program->b = stack_create(program->count);
+	operations = checker_operations_get();
+	checker_operations_perform(operations);
+	if (stack_issorted(program->a) == 1 && program->b->top < 0)
+		printf("OK!");
+	else
+		printf("KO!");
+	//DEBUG
+	printf("\n");
+	stack_print(program->a);
+	//----
+	program_free();
 	return (0);
 }

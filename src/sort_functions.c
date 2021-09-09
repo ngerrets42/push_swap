@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstadd_back.c                                   :+:    :+:            */
+/*   sort_functions.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/24 14:40:54 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/06/23 14:11:05 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/09 11:17:37 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/09 11:36:52 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "sort.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *element)
+void	sort_perform_operaton(t_program *program, t_ilist **operations, t_operation op)
 {
-	t_list	*last;
+	void		(*func)(t_program *);
+	t_ilist		*new;
 
-	if (lst == NULL)
-		return ;
-	last = ft_lstlast(*lst);
-	if (last != NULL)
-		last->next = element;
-	else
-		*lst = element;
+	func = operation_get_function(op);
+	func(program);
+	new = ilst_new(op);
+	if (new == NULL)
+		error(ERR_MALLOC);
+	ilst_add_back(operations, new);
 }

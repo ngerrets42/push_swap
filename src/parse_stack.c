@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstiter.c                                       :+:    :+:            */
+/*   parse_stack.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/24 14:43:09 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/05/29 15:59:26 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/09 11:38:26 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "stack.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+t_stack	*stack_from_argv(int argc, char **argv)
 {
-	while (lst != NULL)
+	t_stack	*stack;
+	int		i;
+	
+	stack = stack_create(argc - 1);
+	i = 1;
+	while (i < argc)
 	{
-		f(lst->content);
-		lst = lst->next;
+		stack_push(stack, ft_atoi(argv[i]));
+		i++;
 	}
+	return (stack);
 }
