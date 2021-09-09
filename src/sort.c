@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:03:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 16:13:45 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 16:57:57 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,23 @@ static void	sort_three(t_program *p, t_ilist **ops)
 
 static void	sort_five(t_program *p, t_ilist **ops)
 {
+	printf("COUNT: %d\n", p->count);
 	while (p->a->top > 2)
 	{
-		if (stack_get_top(p->a) == 3 || stack_get_top(p->a) == 4)
+		if (stack_get_top(p->a) == p->count - 1 ||
+			(p->count == 5 && stack_get_top(p->a) == p->count - 2))
 			sort_perform_operation(p, ops, OP_PB);
 		else
 			sort_perform_operation(p, ops, OP_RR);
 	}
 	sort_three(p, ops);
-	sort_perform_operation(p, ops, OP_PA);
-	sort_perform_operation(p, ops, OP_PA);
-	if (stack_get_top(p->a) > stack_get_second(p->a))
+	while (p->b->top != -1)
+		sort_perform_operation(p, ops, OP_PA);
+	if (p->count == 5 && stack_get_top(p->a) > stack_get_second(p->a))
 		sort_perform_operation(p, ops, OP_SA);
 	sort_perform_operation(p, ops, OP_RA);
-	sort_perform_operation(p, ops, OP_RA);
+	if (p->count == 5)
+		sort_perform_operation(p, ops, OP_RA);
 }
 
 t_ilist	*sort(void)

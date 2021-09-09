@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 11:26:12 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 17:33:58 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 17:05:46 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char	*err_get_msg(t_error err)
 		[ERR_GNL] = "Can't allocate memory or can't read from STDIN\n",
 		[ERR_UNKNOWN_OPERATION] = "Unknown operation!\n",
 		[ERR_STACK_SIZE_ZERO] = "Stack size is zero!\n",
+		[ERR_STACK_DUPVALUE] = "Stack can't contain duplicates!\n",
 		[ERR_DEFAULT] = "UNKNOWN ERROR\n"
 	};
 

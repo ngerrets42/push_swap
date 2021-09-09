@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 11:24:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 17:39:45 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 17:05:53 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum e_error
 	ERR_GNL,
 	ERR_UNKNOWN_OPERATION,
 	ERR_STACK_SIZE_ZERO,
+	ERR_STACK_DUPVALUE,
 	ERR_DEFAULT
 }	t_error;
 

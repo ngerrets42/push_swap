@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:18:04 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 10:50:08 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/09 16:47:49 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_program
 {
-	size_t	count;
+	int		count;
 	t_stack	*a;
 	t_stack	*b;
 }			t_program;
