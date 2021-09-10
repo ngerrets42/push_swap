@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:42:07 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 11:49:36 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/10 19:01:19 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	stack_isempty(t_stack *stack)
 
 int	stack_get_top(t_stack *stack)
 {
+	if (stack->top == -1)
+		return (-1);
 	return (stack->numbers[stack->top]);
 }
 

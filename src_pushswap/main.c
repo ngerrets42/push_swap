@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/10 12:51:46 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/10 16:53:23 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	operations_print(t_ilist *operations)
 	while (operations != NULL)
 	{
 		op = (t_operation)operations->i;
-		printf("%s\n", oplist[op]);
+		//printf("%s\n", oplist[op]);
 		operations = operations->next;
 		i++;
 	}
@@ -64,13 +64,19 @@ int	main(int argc, char **argv)
 	program->b = stack_from_argv(argc, argv);
 	program->a = stack_create(program->count);
 	stack_normalize(program->a, program->b);
-	//stack_print(program->a);
 	if (!stack_issorted(program->a))
 		operations = sort();
-	operations_print(operations);
+	//operations_print(operations);
 	//DEBUG
-	stack_print(program->a);
-	stack_print(program->b);
+	operations_print(operations);
+	//stack_print(program->a);
+	//stack_print(program->b);
+	if (stack_issorted(program->a))
+		printf("SORTED!! YAY!\n");
+	else
+	{
+		printf("NOT SORTED! BAD!\n");
+	}
 	//---
 	program_free();
 	return (0);

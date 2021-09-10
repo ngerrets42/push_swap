@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/10 11:47:51 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/10 13:35:25 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/10 15:38:14 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ typedef struct s_substack
 
 t_substack	substack_from_stack(t_stack *stack);
 t_substack	*substack_divide(t_program *p, t_ilist **ops, t_substack sub);
+void		substack_div(t_program *p, t_ilist **ops, t_substack sub);
 
 #endif

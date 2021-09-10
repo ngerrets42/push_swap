@@ -6,7 +6,7 @@
 #    By: ngerrets <ngerrets@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/07/15 14:47:03 by ngerrets      #+#    #+#                  #
-#    Updated: 2021/09/08 12:25:45 by ngerrets      ########   odam.nl          #
+#    Updated: 2021/09/10 19:19:35 by ngerrets      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@
 NAME := push_swap
 CHECKER := checker
 
-COMPILE_FLAGS ?= -Wall -Wextra
-LINKING_FLAGS ?= -Llib/get_next_line -lgnl
+COMPILE_FLAGS ?= -Wall -Wextra -g -fsanitize=address
+LINKING_FLAGS ?= -Llib/get_next_line -lgnl -g -fsanitize=address
 LIBRARIES ?=
 SOURCE_DIRECTORY ?= src
 HEADER_DIRECTORY ?= include
