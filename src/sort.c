@@ -6,15 +6,17 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:03:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 16:57:57 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/10 12:53:54 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
+#include "substack.h"
 
-static void	sort_fivehundred(t_program *program, t_ilist **operations)
+static void	sort_fivehundred(t_program *p, t_ilist **ops)
 {
-	
+	t_substack sub = substack_from_stack(p->a);
+	substack_divide(p, ops, sub);
 }
 
 static void	sort_hundred(t_program *program, t_ilist **operations)
@@ -85,8 +87,6 @@ t_ilist	*sort(void)
 		sort_three(program, &operations);
 	else if (program->count <= 5)
 		sort_five(program, &operations);
-	else if (program->count <= 100)
-		sort_hundred(program, &operations);
 	else
 		sort_fivehundred(program, &operations);
 	return (operations);

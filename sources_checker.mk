@@ -15,3 +15,4 @@ SOURCES_CHECKER :=	src_checker/checker.c \
 	src/stack_get.c \
 	src/stack_operations.c \
 	src/str.c \
+	src/substack.c \

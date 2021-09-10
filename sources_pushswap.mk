@@ -14,3 +14,4 @@ SOURCES :=	src_pushswap/main.c \
 	src/stack_get.c \
 	src/stack_operations.c \
 	src/str.c \
+	src/substack.c \
