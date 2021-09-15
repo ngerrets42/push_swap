@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 12:20:45 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 11:34:50 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/15 17:04:56 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,10 @@ void	ilst_add_back(t_ilist **lst, t_ilist *element)
 		last->next = element;
 	else
 		*lst = element;
+}
+
+void	ilst_destroy_element(t_ilist *element)
+{
+	if (element)
+		free(element);
 }

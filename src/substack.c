@@ -5,191 +5,172 @@
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/10 11:51:21 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/10 19:45:29 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/15 10:40:37 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/15 16:51:03 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "substack.h"
-#include "sort.h"
-
-#define SUBSTACK_MIN_SIZE 2
-
-static int	g_counter = 0;
 
 //	REMOVE
 #include <stdio.h>
 void	substack_print(t_substack sub)
 {
-	printf("substack\n	count: %d\n	stack_type: %d\n	value_start: %d\n",
-		sub.count, sub.stack_type, sub.value_start);
+	printf("substack\n	count: %d\n	stack_type: %d\n	value_start: %d\n	value_end: %d\n",
+		sub.count, sub.stack_type, sub.value_start, sub.value_end);
 }
 
-t_substack	substack_from_stack(t_stack *stack)
-{
-	t_substack	sub;
 
-	sub.stack_type = ST_A;
-	sub.value_start= 0;
-	sub.count = stack->top + 1;
-	return (sub);
-}
 
-t_substack	substack_set(t_stype type, int count, int start_value)
+
+
+static t_substack	substack_create(t_stype type, int count, int start_value)
 {
 	t_substack	sub;
 
 	sub.count = count;
 	sub.stack_type = type;
-	sub.value_start= start_value;
+	sub.value_start = start_value;
+	sub.value_end = start_value + count - 1;
 	return (sub);
 }
 
-void	substack_single_to_a(t_program *p, t_ilist **ops, t_substack sub)
-{
-	if (sub.stack_type == ST_C)
-	{
-		sort_perform_operation(p, ops, OP_RRB);
-		sort_perform_operation(p, ops, OP_PA);
-	}
-	else if (sub.stack_type == ST_B)
-		sort_perform_operation(p, ops, OP_PA);
-	else
-		sort_perform_operation(p, ops, OP_RRA);
-}
-
-void	substack_prepare(t_program *p, t_ilist **ops, t_substack sub)
-{
-	int	i;
-
-	i = 0;
-	while (i < sub.count)
-	{
-		if (sub.stack_type == ST_C)
-			g_counter++;
-		g_counter++;
-		substack_single_to_a(p, ops, sub);
-		i++;
-	}
-}
-
-void	substack_sortback(t_program *p, t_ilist **ops, t_substack sub)
-{
-	int	i;
-
-	i = 0;
-	while (i < sub.count)
-	{
-		substack_single_to_a(p, ops, sub);
-		i++;
-	}
-	if (stack_get_top(p->a) > stack_get_second(p->a))
-		sort_perform_operation(p, ops, OP_SA);
-}
-
-void	substack_set_and_div(t_program *p, t_ilist **ops, t_substack sub)
+static void	substack_split_duos(t_substack sub[3], t_substack src)
 {
 	int			third;
-	t_substack	div[3];
+	int			modulo;
 
-	third = sub.count / 3;
-	div[ST_A] = substack_set(ST_A, (sub.count - third - third),
-		sub.value_start+ third * 2);
-	substack_div(p, ops, div[ST_A]);
-	div[ST_B] = substack_set(ST_B, third, sub.value_start + third);
-	substack_div(p, ops, div[ST_B]);
-	div[ST_C] = substack_set(ST_C, third, sub.value_start);
-	substack_div(p, ops, div[ST_C]);
+	third = src.count / 3;
+	modulo = src.count % 3;
+	if (src.count <= 4)
+	{
+		sub[ST_A] = substack_create(ST_A, 2, src.value_start + modulo + 1);
+		sub[ST_B] = substack_create(ST_B, 1 + modulo, src.value_start);
+		sub[ST_C] = substack_create(ST_NONE, 0, 0);
+	}
+	else if (src.count == 5)
+	{
+		sub[ST_A] = substack_create(ST_A, 2, src.value_end - 1);
+		sub[ST_B] = substack_create(ST_B, 2, src.value_end - 3);
+		sub[ST_C] = substack_create(ST_C, 1, src.value_start);
+	}
+	else
+	{
+		sub[ST_A] = substack_create(ST_A, third + modulo, src.value_end - third + 1 - modulo);
+		sub[ST_B] = substack_create(ST_B, third, src.value_end - (2 * third) + 1 - modulo);
+		sub[ST_C] = substack_create(ST_C, third, src.value_start);
+	}
 }
 
-void	substack_div_small(t_program *p, t_ilist **ops, t_substack sub)
+/*
+0
+1
+2
+3
+4
+5
+6
+*/
+static void	substack_split(t_substack sub[3], t_substack src)
 {
+	int			third;
+	int			modulo;
+
+	third = src.count / 3;
+	modulo = src.count % 3;
+	if (src.count <= 3)
+		printf("NOOOOOO!\n");
+	else if (third >= 6)
+	{
+		sub[ST_A] = substack_create(ST_A, third + modulo, src.value_end - third + 1 - modulo);
+		sub[ST_B] = substack_create(ST_B, third, src.value_end - (2 * third) + 1 - modulo);
+		sub[ST_C] = substack_create(ST_C, third, src.value_start);
+	}
+	//Possibly nonsense:
+	else if (src.count >= 9)
+	{
+
+		sub[ST_C] = substack_create(ST_C, 3, src.value_start);
+		sub[ST_B] = substack_create(ST_B, 3, src.value_start + 3);
+		sub[ST_A] = substack_create(ST_A, src.count - 6, src.value_end - (src.count - 6) + 1);
+	}
+	else
+	{
+		sub[ST_A] = substack_create(ST_A, 3, src.value_end - 2);
+		sub[ST_C] = substack_create(ST_NONE, 0, 0);
+		third = src.count - 3;
+		if (third >= 3)
+		{
+			sub[ST_B] = substack_create(ST_B, 3, src.value_end - 5);
+			third -= 3;
+		}
+		else
+		{
+			sub[ST_B] = substack_create(ST_B, third, src.value_start);
+			third = 0;
+		}
+		if (third > 0)
+			sub[ST_C] = substack_create(ST_C, third, src.value_start);
+	}
+	// printf("==SOURCE_STACK==\n");
+	// substack_print(src);
+	// printf("==CHILD_STACKS==\n");
+	// substack_print(sub[ST_A]);
+	// substack_print(sub[ST_B]);
+	// substack_print(sub[ST_C]);
+	// printf("================\n");
+}
+
+static int	substack_contains_value(t_substack sub, int value)
+{
+	return (value >= sub.value_start && value <= sub.value_end);
+}
+
+static void	substack_divide_next(t_program *p, t_ilist **ops, t_substack sub[3])
+{
+	if (sub[ST_A].count > 0)
+		substack_divide(p, ops, sub[ST_A]);
+	if (sub[ST_B].count > 0)
+		substack_divide(p, ops, sub[ST_B]);
+	if (sub[ST_C].count > 0)
+		substack_divide(p, ops, sub[ST_C]);
+}
+
+void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
+{
+	t_substack	sub[3];
 	int			i;
 	int			value;
-	t_substack	div[2];
+	static int	sortback = 0;
 
-	substack_prepare(p, ops, sub);
+	if (div.count <= SUBSTACK_TARGET_SIZE)
+	{
+		sortback = 1;
+		return (substack_sortback(p, ops, div));
+	}
+	if (sortback == 1)
+		substack_prepare(p, ops, div);
+	substack_split(sub, div);
 	i = 0;
-	while (i < sub.count)
+	while (i < div.count)
 	{
 		value = stack_get_top(p->a);
-		if (value == -1)
-			return ;
-		//	Move 2 to B
-		if (value >= sub.value_start && value <= sub.value_start + 1)
-			sort_perform_operation(p, ops, OP_PB);
-		//	Move 1 to A
-		if (value == sub.value_start + 2)
+		if (substack_contains_value(sub[ST_A], value))
 			sort_perform_operation(p, ops, OP_RA);
-		i++;
-	}
-	div[ST_A] = substack_set(ST_A, 1, sub.value_start + 2);
-	substack_sortback(p, ops, div[ST_A]);
-	div[ST_B] = substack_set(ST_B, 2, sub.value_start);
-	substack_sortback(p, ops, div[ST_B]);
-}
-
-void	substack_div(t_program *p, t_ilist **ops, t_substack sub)
-{
-	int	i;
-	int	third;
-	int	value;
-
-	third = sub.count / 3;
-	//substack_print(sub);
-	/*if (sub.count == 3)
-	{
-		substack_div_small(p, ops, sub);
-		return ;
-	}*/
-	// sortback
-	if (sub.count <= SUBSTACK_MIN_SIZE)
-	{
-		substack_sortback(p, ops, sub);
-		return ;
-	}
-	//	Move all to top of a-stack
-	if (p->b->top > 0)
-		substack_prepare(p, ops, sub);
-	i = 0;
-	while (i < sub.count)
-	{
-		value = stack_get_top(p->a);
-		//	Move to C (push to b and rotate b)
-		if (value >= sub.value_start && value <= sub.value_start + third - 1)
+		else if (substack_contains_value(sub[ST_B], value))
+			sort_perform_operation(p, ops, OP_PB);
+		else if (sub[ST_C].stack_type != ST_NONE && substack_contains_value(sub[ST_C], value))
 		{
-
-			g_counter += 2;
-
 			sort_perform_operation(p, ops, OP_PB);
 			sort_perform_operation(p, ops, OP_RB);
 		}
-		//	Move to B (push to b)
-		else if (value >= sub.value_start + third && value <= sub.value_start + third * 2 - 1)
-		{
-
-			g_counter++;
-
-			sort_perform_operation(p, ops, OP_PB);
-		}
-		//	Move to A (rotate a)
 		else
 		{
-
-			g_counter++;
-
-			sort_perform_operation(p, ops, OP_RA);
+			printf("val: %d of stack:\n", value);
+			substack_print(div);
+			error(ERR_VALUE_NO_SUBSTACK);
 		}
 		i++;
 	}
-	//	Now do more substacks
-	substack_set_and_div(p, ops, sub);
-}
-
-t_substack	*substack_divide(t_program *p, t_ilist **ops, t_substack sub)
-{
-
-	substack_div(p, ops, sub);
-	printf("COUNTER: %d\n", g_counter);
-	return (NULL);
+	substack_divide_next(p, ops, sub);
 }

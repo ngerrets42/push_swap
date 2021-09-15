@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/10 16:53:23 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/15 18:04:00 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	operations_print(t_ilist *operations)
 	while (operations != NULL)
 	{
 		op = (t_operation)operations->i;
-		//printf("%s\n", oplist[op]);
+		printf("%s\n", oplist[op]);
 		operations = operations->next;
 		i++;
 	}
-	printf("operations: %d\n", i);
+	//printf("operations: %d\n", i);
 }
 
 int	main(int argc, char **argv)
@@ -60,23 +60,26 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	program = program_get();
-	program->count = argc - 1;
 	program->b = stack_from_argv(argc, argv);
+	program->count = program->b->size;
 	program->a = stack_create(program->count);
 	stack_normalize(program->a, program->b);
-	if (!stack_issorted(program->a))
-		operations = sort();
+	if (stack_issorted(program->a))
+		return (0);
+	operations = sort();
+	while (sort_reduce_operations(&operations))
+		;
 	//operations_print(operations);
 	//DEBUG
 	operations_print(operations);
 	//stack_print(program->a);
 	//stack_print(program->b);
-	if (stack_issorted(program->a))
-		printf("SORTED!! YAY!\n");
-	else
-	{
-		printf("NOT SORTED! BAD!\n");
-	}
+	// if (stack_issorted(program->a))
+	// 	printf("SORTED!! YAY!\n");
+	// else
+	// {
+	// 	printf("NOT SORTED! BAD!\n");
+	// }
 	//---
 	program_free();
 	return (0);

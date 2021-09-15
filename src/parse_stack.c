@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 17:06:56 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/15 18:03:09 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,50 @@ int	stack_find_value(t_stack *stack, int value)
 	return (-1);
 }
 
+t_stack	*stack_from_line(char *line)
+{
+	t_stack	*stack;
+	char	**split;
+	int		n;
+	int		i;
+
+	split = ft_split(line, ' ');
+	if (split == NULL)
+		return (NULL);
+	i = 0;
+	while (split[i] != NULL)
+		i++;
+	stack = stack_create(i);
+	i = 0;
+	while (split[i] != NULL)
+	{
+		n = ft_atoi(split[i]);
+		free(split[i]);
+		if (stack_find_value(stack, n) > -1)
+		{
+			while (split[i + 1] != NULL)
+			{
+				free(split[i + 1]);
+				i++;
+			}
+			free(split);
+			error(ERR_STACK_DUPVALUE);
+		}
+		stack_push(stack, n);
+		i++;
+	}
+	free(split);
+	return (stack);
+}
+
 t_stack	*stack_from_argv(int argc, char **argv)
 {
 	t_stack	*stack;
 	int		n;
 	int		i;
 	
+	if (argc == 2)
+		return (stack_from_line(argv[1]));
 	stack = stack_create(argc - 1);
 	i = 1;
 	while (i < argc)

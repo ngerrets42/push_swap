@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   str.h                                              :+:    :+:            */
+/*   ft_strlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/07/15 15:09:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 17:58:17 by ngerrets      ########   odam.nl         */
+/*   Created: 2020/11/24 14:52:06 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/15 17:57:56 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#include "str.h"
 
-# include <stdlib.h>
+size_t	ft_strlen(const char *str)
+{
+	size_t	length;
 
-size_t	ft_strlen(const char *str);
-int		ft_atoi(const char *str);
-char	**ft_split(char const *str, char c);
-int		str_is_str(const char *str1, const char *str2);
-int		is_space(int c);
-char	*ft_substr(char const *str, unsigned int start, size_t len);
-char	*str_trim_spaces(char *str);
-
-#endif
+	length = 0;
+	while (str[length] != '\0')
+		length++;
+	return (length);
+}
