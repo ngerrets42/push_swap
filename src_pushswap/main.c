@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 18:04:00 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/15 19:01:11 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	operations_print(t_ilist *operations)
 		operations = operations->next;
 		i++;
 	}
-	//printf("operations: %d\n", i);
+	printf("operations: %d\n", i);
 }
 
 int	main(int argc, char **argv)
@@ -84,3 +84,21 @@ int	main(int argc, char **argv)
 	program_free();
 	return (0);
 }
+
+
+
+/*
+
+	5
+6	
+1	6
+2	7
+3	8
+4
+rb
+pa
+rrb
+pb
+
+
+*/

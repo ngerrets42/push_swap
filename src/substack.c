@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/15 10:40:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 16:51:03 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/15 19:12:23 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	substack_split(t_substack sub[3], t_substack src)
 	modulo = src.count % 3;
 	if (src.count <= 3)
 		printf("NOOOOOO!\n");
-	else if (third >= 6)
+	else if (third >= 9)
 	{
 		sub[ST_A] = substack_create(ST_A, third + modulo, src.value_end - third + 1 - modulo);
 		sub[ST_B] = substack_create(ST_B, third, src.value_end - (2 * third) + 1 - modulo);
@@ -157,19 +157,15 @@ void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
 		value = stack_get_top(p->a);
 		if (substack_contains_value(sub[ST_A], value))
 			sort_perform_operation(p, ops, OP_RA);
-		else if (substack_contains_value(sub[ST_B], value))
-			sort_perform_operation(p, ops, OP_PB);
 		else if (sub[ST_C].stack_type != ST_NONE && substack_contains_value(sub[ST_C], value))
 		{
 			sort_perform_operation(p, ops, OP_PB);
 			sort_perform_operation(p, ops, OP_RB);
 		}
+		else if (substack_contains_value(sub[ST_B], value))
+			sort_perform_operation(p, ops, OP_PB);
 		else
-		{
-			printf("val: %d of stack:\n", value);
-			substack_print(div);
 			error(ERR_VALUE_NO_SUBSTACK);
-		}
 		i++;
 	}
 	substack_divide_next(p, ops, sub);
