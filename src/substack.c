@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/15 10:40:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 19:12:23 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/16 11:33:01 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ static void	substack_split(t_substack sub[3], t_substack src)
 
 	third = src.count / 3;
 	modulo = src.count % 3;
-	if (src.count <= 3)
-		printf("NOOOOOO!\n");
-	else if (third >= 9)
+	if (third >= 9)
 	{
 		sub[ST_A] = substack_create(ST_A, third + modulo, src.value_end - third + 1 - modulo);
 		sub[ST_B] = substack_create(ST_B, third, src.value_end - (2 * third) + 1 - modulo);
@@ -121,11 +119,6 @@ static void	substack_split(t_substack sub[3], t_substack src)
 	// printf("================\n");
 }
 
-static int	substack_contains_value(t_substack sub, int value)
-{
-	return (value >= sub.value_start && value <= sub.value_end);
-}
-
 static void	substack_divide_next(t_program *p, t_ilist **ops, t_substack sub[3])
 {
 	if (sub[ST_A].count > 0)
@@ -135,6 +128,36 @@ static void	substack_divide_next(t_program *p, t_ilist **ops, t_substack sub[3])
 	if (sub[ST_C].count > 0)
 		substack_divide(p, ops, sub[ST_C]);
 }
+
+/*static void	_sortback_if_able(t_program *p, t_ilist **ops)
+{
+	int	value;
+
+	while (1)
+	{
+		value = p->a->size - p->a->top - 2;
+		if (value == -1)
+			return ;
+		printf("value: %d\n", value);
+		if (stack_get_bottom(p->a) == value)
+		{
+			sort_perform_operation(p, ops, OP_RRA);
+			continue ;
+		}
+		else if (stack_get_top(p->b) == value)
+		{
+			sort_perform_operation(p, ops, OP_PA);
+			continue ;
+		}
+		else if (stack_get_bottom(p->b) == value)
+		{
+			sort_perform_operation(p, ops, OP_RRB);
+			sort_perform_operation(p, ops, OP_PA);
+			continue ;
+		}
+		return ;
+	}
+}*/
 
 void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
 {
@@ -164,8 +187,8 @@ void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
 		}
 		else if (substack_contains_value(sub[ST_B], value))
 			sort_perform_operation(p, ops, OP_PB);
-		else
-			error(ERR_VALUE_NO_SUBSTACK);
+		//else
+		//	error(ERR_VALUE_NO_SUBSTACK);
 		i++;
 	}
 	substack_divide_next(p, ops, sub);

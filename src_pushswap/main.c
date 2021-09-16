@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 19:01:11 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/16 12:01:20 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	main(int argc, char **argv)
 	operations = sort();
 	while (sort_reduce_operations(&operations))
 		;
-	//operations_print(operations);
-	//DEBUG
 	operations_print(operations);
+	//DEBUG
+	//operations_print(operations);
 	//stack_print(program->a);
 	//stack_print(program->b);
-	// if (stack_issorted(program->a))
-	// 	printf("SORTED!! YAY!\n");
+	if (stack_issorted(program->a))
+		printf("SORTED!! YAY!\n");
 	// else
 	// {
 	// 	printf("NOT SORTED! BAD!\n");

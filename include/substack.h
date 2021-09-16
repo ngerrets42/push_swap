@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/10 11:47:51 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 18:27:29 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/16 10:42:19 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_substack
 	t_stype	stack_type;
 }			t_substack;
 
+int			substack_contains_value(t_substack sub, int value);
 void		substack_prepare(t_program *p, t_ilist **ops, t_substack sub);
 void		substack_sortback(t_program *p, t_ilist **ops, t_substack sub);
 void		substack_divide(t_program *p, t_ilist **ops, t_substack div);

@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:03:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 17:33:42 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/16 11:21:50 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	sort_reduce_operations(t_ilist **ops)
 			no_duplicates = _remove_next_op_and_edit(current, OP_RR);
 		else if (op1 == OP_RRA && op2 == OP_RRB)
 			no_duplicates = _remove_next_op_and_edit(current, OP_RRR);
+		else if (op1 == OP_RR && op2 == OP_RRA)
+			no_duplicates = _remove_next_op_and_edit(current, OP_RB);
 		current = current->next;
 	}
 	return (no_duplicates);

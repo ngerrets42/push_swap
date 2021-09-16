@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/15 11:16:11 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 19:05:41 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/16 11:46:13 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,33 @@ t_substack	substack_from_stack(t_stack *stack)
 	return (sub);
 }
 
+int	substack_contains_value(t_substack sub, int value)
+{
+	return (value >= sub.value_start && value <= sub.value_end);
+}
+
 static void	substack_single_to_a(t_program *p, t_ilist **ops, t_substack sub)
 {
 	if (sub.stack_type == ST_C)
 	{
-		sort_perform_operation(p, ops, OP_RRB);
-		sort_perform_operation(p, ops, OP_PA);
+		if (substack_contains_value(sub, stack_get_top(p->b)) == 0)
+		{
+			if (substack_contains_value(sub, stack_get_bottom(p->b)))
+				sort_perform_operation(p, ops, OP_RRB);
+		}
+		if (substack_contains_value(sub, stack_get_top(p->b)))
+			sort_perform_operation(p, ops, OP_PA);
 	}
 	else if (sub.stack_type == ST_B)
-		sort_perform_operation(p, ops, OP_PA);
+	{
+		if (substack_contains_value(sub, stack_get_top(p->b)))
+			sort_perform_operation(p, ops, OP_PA);
+	}
 	else if (sub.stack_type == ST_A && p->a->top >= sub.count - 1)
-		sort_perform_operation(p, ops, OP_RRA);
+	{
+		if (substack_contains_value(sub, stack_get_bottom(p->a)))
+			sort_perform_operation(p, ops, OP_RRA);
+	}
 }
 
 void	substack_prepare(t_program *p, t_ilist **ops, t_substack sub)
@@ -41,6 +57,9 @@ void	substack_prepare(t_program *p, t_ilist **ops, t_substack sub)
 	int	i;
 
 	i = 0;
+	if (sub.stack_type == ST_A &&
+		substack_contains_value(sub, stack_get_top(p->a)))
+		return ;
 	while (i < sub.count)
 	{
 		substack_single_to_a(p, ops, sub);
@@ -122,62 +141,6 @@ static void	_move_back(t_program *p, t_ilist **ops, t_substack sub)
 
 static void	_sortback_three(t_program *p, t_ilist **ops, t_substack sub)
 {
-	int		x[3];
-	t_stack	*stack;
-
-	/*stack = p->b;
-	if (sub.stack_type == ST_A)
-		stack = p->a;
-	x[0] = _find_value(stack, sub.stack_type, sub.value_start, 0);
-	x[1] = _find_value(stack, sub.stack_type, sub.value_start, 1);
-	x[2] = _find_value(stack, sub.stack_type, sub.value_start, 2);
-	substack_single_to_a(p, ops, sub);
-	if (_check_array(x, (int []){0, 1, 2}, sub.value_start))
-	{
-		_move_away(p, ops, sub);
-		substack_single_to_a(p, ops, sub);
-		_move_away(p, ops, sub);
-		substack_single_to_a(p, ops, sub);
-		_move_back(p, ops, sub);
-		_move_back(p, ops, sub);
-	}
-	else if (_check_array(x, (int []){2, 1, 0}, sub.value_start))
-	{
-		substack_single_to_a(p, ops, sub);
-		substack_single_to_a(p, ops, sub);
-	}
-	else if (_check_array(x, (int []){1, 2, 0}, sub.value_start))
-	{
-		substack_single_to_a(p, ops, sub);
-		sort_perform_operation(p, ops, OP_SA);
-		substack_single_to_a(p, ops, sub);
-	}
-	else if (_check_array(x, (int []){1, 0, 2}, sub.value_start))
-	{
-		substack_single_to_a(p, ops, sub);
-		_move_away(p, ops, sub);
-		substack_single_to_a(p, ops, sub);
-		sort_perform_operation(p, ops, OP_SA);
-		_move_back(p, ops, sub);
-	}
-	else if (_check_array(x, (int []){0, 2, 1}, sub.value_start))
-	{
-		substack_single_to_a(p, ops, sub);
-		sort_perform_operation(p, ops, OP_SA);
-		substack_single_to_a(p, ops, sub);
-		sort_perform_operation(p, ops, OP_SA);
-	}
-	else if (_check_array(x, (int []){2, 0, 1}, sub.value_start))
-	{
-		substack_single_to_a(p, ops, sub);
-		substack_single_to_a(p, ops, sub);
-		sort_perform_operation(p, ops, OP_SA);
-	}
-	else
-	{
-		printf("\n\nNONE! %d %d %d START: %d\n\n", x[0], x[1], x[2], sub.value_start);
-	}*/
-
 	substack_single_to_a(p, ops, sub);
 	if (stack_get_top(p->a) == sub.value_start)
 	{
