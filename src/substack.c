@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/15 10:40:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/16 11:33:01 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/16 14:49:03 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static void	substack_split(t_substack sub[3], t_substack src)
 		sub[ST_B] = substack_create(ST_B, third, src.value_end - (2 * third) + 1 - modulo);
 		sub[ST_C] = substack_create(ST_C, third, src.value_start);
 	}
-	//Possibly nonsense:
 	else if (src.count >= 9)
 	{
 
@@ -129,7 +128,7 @@ static void	substack_divide_next(t_program *p, t_ilist **ops, t_substack sub[3])
 		substack_divide(p, ops, sub[ST_C]);
 }
 
-/*static void	_sortback_if_able(t_program *p, t_ilist **ops)
+static void	_sortback_if_able(t_program *p, t_ilist **ops)
 {
 	int	value;
 
@@ -157,7 +156,78 @@ static void	substack_divide_next(t_program *p, t_ilist **ops, t_substack sub[3])
 		}
 		return ;
 	}
-}*/
+}
+
+void	substack_div_c(t_program *p, t_ilist **ops, t_substack div)
+{
+	t_substack	sub[3];
+	int			i;
+	int			value;
+
+	substack_split(sub, div);
+	i = 0;
+	if (!substack_contains_value(div, stack_get_top(p->b)))
+	{
+		while (i < div.count)
+		{
+			sort_perform_operation(p, ops, OP_RRB);
+			i++;
+		}
+	}
+	i = 0;
+	while (i < div.count)
+	{
+		value = stack_get_top(p->b);
+		if (substack_contains_value(sub[ST_A], value))
+		{
+			sort_perform_operation(p, ops, OP_PA);
+			sort_perform_operation(p, ops, OP_RA);
+		}
+		else if (sub[ST_C].stack_type != ST_NONE && substack_contains_value(sub[ST_C], value))
+			sort_perform_operation(p, ops, OP_RB);
+		else if (substack_contains_value(sub[ST_B], value))
+			sort_perform_operation(p, ops, OP_PA);
+		i++;
+	}
+	i = 0;
+	while (i < sub[ST_B].count)
+	{
+		sort_perform_operation(p, ops, OP_PB);
+		i++;
+	}
+	substack_divide_next(p, ops, sub);
+}
+
+void	substack_div_b(t_program *p, t_ilist **ops, t_substack div)
+{
+	t_substack	sub[3];
+	int			i;
+	int			value;
+
+	substack_split(sub, div);
+	i = 0;
+	while (i < div.count)
+	{
+		value = stack_get_top(p->b);
+		if (substack_contains_value(sub[ST_A], value))
+		{
+			sort_perform_operation(p, ops, OP_PA);
+			sort_perform_operation(p, ops, OP_RA);
+		}
+		else if (sub[ST_C].stack_type != ST_NONE && substack_contains_value(sub[ST_C], value))
+			sort_perform_operation(p, ops, OP_RB);
+		else if (substack_contains_value(sub[ST_B], value))
+			sort_perform_operation(p, ops, OP_PA);
+		i++;
+	}
+	i = 0;
+	while (i < sub[ST_B].count)
+	{
+		sort_perform_operation(p, ops, OP_PB);
+		i++;
+	}
+	substack_divide_next(p, ops, sub);
+}
 
 void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
 {
@@ -171,6 +241,12 @@ void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
 		sortback = 1;
 		return (substack_sortback(p, ops, div));
 	}
+	//if (sortback == 1)
+	//	_sortback_if_able(p, ops);
+	if (div.stack_type == ST_B)
+		return (substack_div_b(p, ops, div));
+	else if (div.stack_type == ST_C)
+		return (substack_div_c(p, ops, div));
 	if (sortback == 1)
 		substack_prepare(p, ops, div);
 	substack_split(sub, div);
@@ -183,12 +259,11 @@ void	substack_divide(t_program *p, t_ilist **ops, t_substack div)
 		else if (sub[ST_C].stack_type != ST_NONE && substack_contains_value(sub[ST_C], value))
 		{
 			sort_perform_operation(p, ops, OP_PB);
-			sort_perform_operation(p, ops, OP_RB);
+			if (p->b->top > 0 && substack_contains_value(sub[ST_C], stack_get_second(p->b)) == 0)
+				sort_perform_operation(p, ops, OP_RB);
 		}
 		else if (substack_contains_value(sub[ST_B], value))
 			sort_perform_operation(p, ops, OP_PB);
-		//else
-		//	error(ERR_VALUE_NO_SUBSTACK);
 		i++;
 	}
 	substack_divide_next(p, ops, sub);
