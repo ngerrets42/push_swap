@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:19:59 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 10:49:37 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 12:38:02 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_program	*program_alloc(void)
 	program->a = NULL;
 	program->b = NULL;
 	program->count = 0;
-
 	return (program);
 }
 

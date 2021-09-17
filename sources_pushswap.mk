@@ -17,5 +17,7 @@ SOURCES :=	src_pushswap/main.c \
 	src/stack_get.c \
 	src/stack_operations.c \
 	src/str.c \
-	src/substack.c \
+	src/substack_divide.c \
 	src/substack_functions.c \
+	src/substack_sortback.c \
+	src/substack_split.c \

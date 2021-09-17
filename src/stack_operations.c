@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 13:56:36 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 17:55:30 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 12:30:53 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,11 @@ void	stack_pushto(t_stack *from, t_stack *to)
 	if (from->top < 0)
 		return ;
 	temp = stack_pop(from);
-	if (stack_push(to, temp) == 1)
-	{
-		//ERROR
-	}
+	stack_push(to, temp);
 }
 
 /*
-**	shift up all elements of the stack by 1. The first element becomes the last one.
+**	shift up all elements of the stack by 1. First element becomes the last one.
 */
 void	stack_rotate(t_stack *stack)
 {
@@ -63,7 +60,7 @@ void	stack_rotate(t_stack *stack)
 }
 
 /*
-**	shift down all elements of the stack by 1. The last element becomes the first one.
+**	shift down all elements of the stack by 1. Last element becomes the first one.
 */
 void	stack_rotate_reverse(t_stack *stack)
 {

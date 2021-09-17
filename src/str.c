@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 14:01:15 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 12:16:01 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 12:28:47 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ int	is_space(int c)
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }
 
-char	*str_trim_spaces(char *str)
+static int	_count_spaces(char *str)
 {
-	int		i;
-	int		count;
-	char	*new_str;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -44,7 +43,19 @@ char	*str_trim_spaces(char *str)
 		count += is_space(str[i]);
 		i++;
 	}
-	new_str = malloc(sizeof(char) * (i - count + 1));
+	return (count);
+}
+
+char	*str_trim_spaces(char *str)
+{
+	int		i;
+	int		count;
+	char	*new_str;
+
+	count = _count_spaces(str);
+	new_str = malloc(sizeof(char) * (ft_strlen(str) - count + 1));
+	if (new_str == NULL)
+		return (NULL);
 	i = 0;
 	count = 0;
 	while (str[i] != '\0')

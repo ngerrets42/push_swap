@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 18:03:09 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 13:29:08 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,33 +55,11 @@ void	stack_normalize(t_stack *a, t_stack *b)
 		stack_pop(b);
 }
 
-int	stack_find_value(t_stack *stack, int value)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->top)
-	{
-		if (stack->numbers[i] == value)
-			return (1);
-		i++;
-	}
-	return (-1);
-}
-
-t_stack	*stack_from_line(char *line)
+t_stack	*_stack_construct(char **split, int i)
 {
 	t_stack	*stack;
-	char	**split;
 	int		n;
-	int		i;
 
-	split = ft_split(line, ' ');
-	if (split == NULL)
-		return (NULL);
-	i = 0;
-	while (split[i] != NULL)
-		i++;
 	stack = stack_create(i);
 	i = 0;
 	while (split[i] != NULL)
@@ -101,6 +79,22 @@ t_stack	*stack_from_line(char *line)
 		stack_push(stack, n);
 		i++;
 	}
+	return (stack);
+}
+
+t_stack	*stack_from_line(char *line)
+{
+	t_stack	*stack;
+	char	**split;
+	int		i;
+
+	split = ft_split(line, ' ');
+	if (split == NULL)
+		return (NULL);
+	i = 0;
+	while (split[i] != NULL)
+		i++;
+	stack = _stack_construct(split, i);
 	free(split);
 	return (stack);
 }
@@ -110,7 +104,7 @@ t_stack	*stack_from_argv(int argc, char **argv)
 	t_stack	*stack;
 	int		n;
 	int		i;
-	
+
 	if (argc == 2)
 		return (stack_from_line(argv[1]));
 	stack = stack_create(argc - 1);

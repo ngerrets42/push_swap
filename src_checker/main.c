@@ -6,35 +6,12 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 18:06:09 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 13:29:50 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "program.h"
-
-void	debug_print_ilist(t_ilist *lst)
-{
-	while (lst != NULL)
-	{
-		printf("%d\n", lst->i);
-		lst = lst->next;
-	}
-}
-
-static void	stack_print(t_stack *stack)
-{
-	int	i;
-
-	i = stack->top;
-	printf("------\n");
-	while (i >= 0)
-	{
-		printf("|%3d|\n", stack->numbers[i]);
-		i--;
-	}
-	printf("------\n");
-}
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/16 12:01:20 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 13:30:40 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 #include "ilist.h"
 #include "sort.h"
 
-static void	stack_print(t_stack *stack)
-{
-	int	i;
+// static void	stack_print(t_stack *stack)
+// {
+// 	int	i;
 
-	i = stack->top;
-	printf("------\n");
-	while (i >= 0)
-	{
-		printf("|%3d|\n", stack->numbers[i]);
-		i--;
-	}
-	printf("------\n");
-}
+// 	i = stack->top;
+// 	printf("------\n");
+// 	while (i >= 0)
+// 	{
+// 		printf("|%3d|\n", stack->numbers[i]);
+// 		i--;
+// 	}
+// 	printf("------\n");
+// }
 
 static void	operations_print(t_ilist *operations)
 {
@@ -69,36 +69,13 @@ int	main(int argc, char **argv)
 	operations = sort();
 	while (sort_reduce_operations(&operations))
 		;
-	operations_print(operations);
-	//DEBUG
 	//operations_print(operations);
+	//DEBUG
+	operations_print(operations);
 	//stack_print(program->a);
 	//stack_print(program->b);
-	if (stack_issorted(program->a))
-		printf("SORTED!! YAY!\n");
-	// else
-	// {
-	// 	printf("NOT SORTED! BAD!\n");
-	// }
-	//---
+	if (!stack_issorted(program->a))
+		error(ERR_STACK_NOT_SORTED);
 	program_free();
 	return (0);
 }
-
-
-
-/*
-
-	5
-6	
-1	6
-2	7
-3	8
-4
-rb
-pa
-rrb
-pb
-
-
-*/

@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:02:49 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 13:13:57 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 13:28:36 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		stack_isempty(t_stack *stack);
 int		stack_get_top(t_stack *stack);
 int		stack_get_bottom(t_stack *stack);
 int		stack_get_second(t_stack *stack);
+int		stack_find_value(t_stack *stack, int value);
 
 void	stack_swap(t_stack *stack);
 void	stack_pushto(t_stack *from, t_stack *to);

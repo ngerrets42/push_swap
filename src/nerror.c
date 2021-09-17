@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 11:26:12 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 11:21:45 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 13:31:00 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static char	*err_get_msg(t_error err)
 		[ERR_UNKNOWN_OPERATION] = "Unknown operation!\n",
 		[ERR_STACK_SIZE_ZERO] = "Stack size is zero!\n",
 		[ERR_STACK_DUPVALUE] = "Stack can't contain duplicates!\n",
+		[ERR_STACK_NOT_SORTED] = "Stack not sorted!\n",
 		[ERR_VALUE_NO_SUBSTACK] = "Value doesn't fit in any substack.\n",
 		[ERR_DEFAULT] = "UNKNOWN ERROR\n"
 	};
