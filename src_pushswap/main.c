@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 13:30:40 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 17:04:55 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	operations_print(t_ilist *operations)
 	while (operations != NULL)
 	{
 		op = (t_operation)operations->i;
-		printf("%s\n", oplist[op]);
+		//printf("%s\n", oplist[op]);
 		operations = operations->next;
 		i++;
 	}

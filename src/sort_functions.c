@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:17:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 12:37:15 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/17 15:20:36 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	sort_reduce_operations(t_ilist **ops)
 	{
 		op1 = (t_operation)current->next->i;
 		op2 = (t_operation)current->next->next->i;
-		no_duplicates = _check_and_rem(op1, op2, current);
+		if (_check_and_rem(op1, op2, current))
+			no_duplicates = 1;
 		current = current->next;
 	}
 	return (no_duplicates);
