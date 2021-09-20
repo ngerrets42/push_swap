@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:42:07 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 13:28:24 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 13:20:15 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	stack_find_value(t_stack *stack, int value)
 	int	i;
 
 	i = 0;
-	while (i < stack->top)
+	while (i <= stack->top)
 	{
 		if (stack->numbers[i] == value)
 			return (1);

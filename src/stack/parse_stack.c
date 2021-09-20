@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 12:42:28 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 13:33:00 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ void	stack_normalize(t_stack *a, t_stack *b)
 
 t_stack	*_stack_construct(char **split, int i)
 {
-	t_stack	*stack;
-	int		n;
+	t_stack		*stack;
+	long int	n;
 
-	stack = stack_create(i);
-	i = 0;
-	while (split[i] != NULL)
+	stack = stack_create(i + 1);
+	while (i >= 0)
 	{
 		n = ft_atol(split[i]);
 		if (ft_strlen(split[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT)
@@ -70,16 +69,17 @@ t_stack	*_stack_construct(char **split, int i)
 		free(split[i]);
 		if (stack_find_value(stack, n) > -1)
 		{
-			while (split[i + 1] != NULL)
+			i = 0;
+			while (split[i] != NULL)
 			{
-				free(split[i + 1]);
+				free(split[i]);
 				i++;
 			}
 			free(split);
 			error(ERR_STACK_DUPVALUE);
 		}
 		stack_push(stack, n);
-		i++;
+		i--;
 	}
 	return (stack);
 }
@@ -96,22 +96,22 @@ t_stack	*stack_from_line(char *line)
 	i = 0;
 	while (split[i] != NULL)
 		i++;
-	stack = _stack_construct(split, i);
+	stack = _stack_construct(split, i - 1);
 	free(split);
 	return (stack);
 }
 
 t_stack	*stack_from_argv(int argc, char **argv)
 {
-	t_stack	*stack;
-	int		n;
-	int		i;
+	t_stack		*stack;
+	long int	n;
+	int			i;
 
 	if (argc == 2)
 		return (stack_from_line(argv[1]));
 	stack = stack_create(argc - 1);
-	i = 1;
-	while (i < argc)
+	i = argc - 1;
+	while (i > 0)
 	{
 		n = ft_atol(argv[i]);
 		if (ft_strlen(argv[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT)
@@ -119,7 +119,7 @@ t_stack	*stack_from_argv(int argc, char **argv)
 		if (stack_find_value(stack, n) > -1)
 			error(ERR_STACK_DUPVALUE);
 		stack_push(stack, n);
-		i++;
+		i--;
 	}
 	return (stack);
 }

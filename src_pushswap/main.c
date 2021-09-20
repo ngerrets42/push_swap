@@ -6,11 +6,10 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 11:34:12 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 13:33:41 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "program.h"
 #include "operations.h"
 #include "ilist.h"
@@ -32,7 +31,6 @@ static void	operations_print(t_ilist *operations)
 		operations = operations->next;
 		i++;
 	}
-	printf("operations: %d\n", i);
 }
 
 int	main(int argc, char **argv)
