@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/15 11:16:11 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 12:21:04 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 12:06:52 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,26 @@ int	substack_contains_value(t_substack sub, int value)
 	return (value >= sub.value_start && value <= sub.value_end);
 }
 
-// static int	_find_value(t_stack *stack, t_stype type, int value, int x)
-// {
-// 	int	i;
-
-// 	if (type == ST_B)
-// 	{
-// 		i = stack->top;
-// 		while (i > -1)
-// 		{
-// 			if (stack->numbers[i] == value || stack->numbers[i] == value + 1
-// 				|| stack->numbers[i] == value + 2)
-// 				return (stack->numbers[i - x]);
-// 			i--;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		i = 0;
-// 		while (i < stack->size)
-// 		{
-// 			if (stack->numbers[i] == value || stack->numbers[i] == value + 1
-// 				|| stack->numbers[i] == value + 2)
-// 				return (stack->numbers[i + x]);
-// 			i++;
-// 		}
-// 	}
-// 	return (-1);
-// }
+void	substack_single_to_a(t_program *p, t_ilist **ops, t_substack sub)
+{
+	if (sub.stack_type == ST_C)
+	{
+		if (substack_contains_value(sub, stack_get_top(p->b)) == 0)
+		{
+			if (substack_contains_value(sub, stack_get_bottom(p->b)))
+				sort_perform_operation(p, ops, OP_RRB);
+		}
+		if (substack_contains_value(sub, stack_get_top(p->b)))
+			sort_perform_operation(p, ops, OP_PA);
+	}
+	else if (sub.stack_type == ST_B)
+	{
+		if (substack_contains_value(sub, stack_get_top(p->b)))
+			sort_perform_operation(p, ops, OP_PA);
+	}
+	else if (sub.stack_type == ST_A && p->a->top >= sub.count - 1)
+	{
+		if (substack_contains_value(sub, stack_get_bottom(p->a)))
+			sort_perform_operation(p, ops, OP_RRA);
+	}
+}

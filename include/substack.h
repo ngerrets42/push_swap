@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/10 11:47:51 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 12:14:14 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 12:07:14 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void		substack_sortback(t_program *p, t_ilist **ops, t_substack sub);
 void		substack_divide(t_program *p, t_ilist **ops, t_substack div);
 t_substack	substack_from_stack(t_stack *stack);
 t_substack	substack_create(t_stype type, int count, int start_value);
+void		substack_single_to_a(t_program *p, t_ilist **ops, t_substack sub);
 
 #endif

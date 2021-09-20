@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:17:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 15:20:36 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 12:13:54 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static int	_check_and_rem(t_operation op1, t_operation op2, t_ilist *current)
 	else if (op1 == OP_RRB && op2 == OP_RB)
 		no_duplicates = _remove_next_two_ops(current);
 	else if (op1 == OP_RB && op2 == OP_RA)
+		no_duplicates = _remove_next_op_and_edit(current, OP_RR);
+	else if (op1 == OP_RA && op2 == OP_RB)
 		no_duplicates = _remove_next_op_and_edit(current, OP_RR);
 	else if (op1 == OP_RRA && op2 == OP_RRB)
 		no_duplicates = _remove_next_op_and_edit(current, OP_RRR);
