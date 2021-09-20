@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   ft_atol.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/24 14:58:49 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/07/15 15:13:58 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 12:30:36 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static int	ft_isdigit(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atol(const char *str)
 {
-	int		negative;
-	int		nbr;
-	size_t	i;
+	int			negative;
+	long int	nbr;
+	size_t		i;
 
 	negative = 1;
 	nbr = 0;

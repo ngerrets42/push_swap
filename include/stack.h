@@ -6,12 +6,16 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:02:49 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 13:28:36 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 12:42:21 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_H
 # define STACK_H
+
+# define INT_DIGITS 11
+# define MIN_INT -2147483648
+# define MAX_INT 2147483647
 
 # include "str.h"
 

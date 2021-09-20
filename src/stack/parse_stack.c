@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 13:29:08 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 12:42:28 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	stack_lowest(t_stack *stack)
 
 	i = 0;
 	lowest_i = 0;
-	lowest_n = __INT_MAX__;
+	lowest_n = MAX_INT;
 	while (i <= stack->top)
 	{
 		if (stack->numbers[i] < lowest_n)
@@ -42,12 +42,12 @@ void	stack_normalize(t_stack *a, t_stack *b)
 	a->top = b->top;
 	next_index = stack_lowest(b);
 	a->numbers[next_index] = 0;
-	b->numbers[next_index] = __INT_MAX__;
+	b->numbers[next_index] = MAX_INT;
 	i = 1;
 	while (i < a->size)
 	{
 		next_index = stack_lowest(b);
-		b->numbers[next_index] = __INT_MAX__;
+		b->numbers[next_index] = MAX_INT;
 		a->numbers[next_index] = i;
 		i++;
 	}
@@ -64,7 +64,9 @@ t_stack	*_stack_construct(char **split, int i)
 	i = 0;
 	while (split[i] != NULL)
 	{
-		n = ft_atoi(split[i]);
+		n = ft_atol(split[i]);
+		if (ft_strlen(split[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT)
+			error(ERR_NOT_INT);
 		free(split[i]);
 		if (stack_find_value(stack, n) > -1)
 		{
@@ -111,7 +113,9 @@ t_stack	*stack_from_argv(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		n = ft_atoi(argv[i]);
+		n = ft_atol(argv[i]);
+		if (ft_strlen(argv[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT)
+			error(ERR_NOT_INT);
 		if (stack_find_value(stack, n) > -1)
 			error(ERR_STACK_DUPVALUE);
 		stack_push(stack, n);
