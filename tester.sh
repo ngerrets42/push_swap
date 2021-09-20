@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
@@ -6,15 +8,13 @@
 #    By: ngerrets <ngerrets@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/09/20 15:51:42 by ngerrets      #+#    #+#                  #
-#    Updated: 2021/09/20 17:24:44 by ngerrets      ########   odam.nl          #
+#    Updated: 2021/09/20 17:26:41 by ngerrets      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 #
 #	Credits for the "args.py" script goes to student mraasvel
 #
-
-#!/bin/sh
 
 # For default tests
 f() {
@@ -61,6 +61,8 @@ f_noprint() {
 }
 
 echo "42:	checker: count:	permutation:"
+echo "\nOne"
+f "42"
 echo "\nTwo"
 f "0 1"
 f "1 0"
