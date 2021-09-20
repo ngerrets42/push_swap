@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 14:46:03 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 17:10:01 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	main(int argc, char **argv)
 	t_program	*program;
 
 	if (argc == 1)
-	{
-		putstr("OK\n");
 		return (0);
-	}
 	program = program_get();
 	program->a = stack_from_argv(argc, argv);
 	program->count = program->a->size;

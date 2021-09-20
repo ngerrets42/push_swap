@@ -1,3 +1,5 @@
+#	By student mraasvel
+
 import random
 import time
 import sys
