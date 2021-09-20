@@ -20,4 +20,5 @@ SOURCES :=	src_pushswap/main.c \
 	src/str/ft_split.c \
 	src/str/ft_strlen.c \
 	src/str/ft_substr.c \
+	src/str/has_alpha.c \
 	src/str/str.c \

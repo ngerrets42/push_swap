@@ -1,5 +1,74 @@
 #!/bin/sh
 
-for i in {1..10000};
-do ./push_swap $(python3 args.py 100) | grep "7"
-done;
+# For default tests
+f() {
+	INSTRUCTIONS="./push_swap $1"
+	$INSTRUCTIONS | ./checker_Mac $1 | tr -d '\n';
+	echo "	" | tr -d '\n';
+	$INSTRUCTIONS | ./checker $1 | tr -d '\n';
+	$INSTRUCTIONS | wc -l | tr -d '\n';
+	echo "	" $1;
+}
+
+# For testing errors
+f_error() {
+	echo "	input: " "\""$1"\""
+	echo "	push_swap: " | tr -d '\n';
+	./push_swap $1 | tr -d '\n';
+	echo "";
+	echo "	checker: " | tr -d '\n';
+	./checker $1 | tr -d '\n';
+	echo "\n";
+}
+
+# tests but don't print the input stack
+f_noprint() {
+	INSTRUCTIONS="./push_swap $1"
+	$INSTRUCTIONS | ./checker_Mac $1 | tr -d '\n';
+	echo "	" | tr -d '\n';
+	$INSTRUCTIONS | ./checker $1 | tr -d '\n';
+	$INSTRUCTIONS | wc -l | tr -d '\n';
+	echo "	  NOT PRINTED";
+}
+
+echo "42:	checker: count:	permutation:"
+echo "\nThree:"
+f "0 1 2"
+f "2 1 0"
+f "1 2 0"
+echo "\nFive:"
+for i in {1..10}; do f "$(python3 args.py 5)"; done;
+echo "\nSix:"
+for i in {1..3}; do f "$(python3 args.py 6)"; done;
+echo "\nSeven:"
+for i in {1..3}; do f "$(python3 args.py 7)"; done;
+echo "\nEight:"
+for i in {1..3}; do f "$(python3 args.py 8)"; done;
+echo "\nNine:"
+for i in {1..3}; do f "$(python3 args.py 9)"; done;
+echo "\nTen:"
+for i in {1..3}; do f "$(python3 args.py 10)"; done;
+echo "\nTwenty:"
+for i in {1..3}; do f "$(python3 args.py 20)"; done;
+echo "\nFivety:"
+for i in {1..3}; do f_noprint "$(python3 args.py 50)"; done;
+echo "\nHundred:"
+for i in {1..10}; do f_noprint "$(python3 args.py 100)"; done;
+echo "\nFive hundred:"
+for i in {1..10}; do f_noprint "$(python3 args.py 500)"; done;
+
+echo "\nERROR CHECK:\n"
+f_error "-835770774378 9 0"
+f_error "7885802848"
+f_error "732323733777547573578903747875737403147078026"
+f_error ""
+f_error "9 8 7 6 5 4 3 2 1 9 10 11"
+f_error "a b c d e f g"
+
+echo "\nExtra Tests:"
+echo "Thousand:"
+for i in {1..3}; do f_noprint "$(python3 args.py 1000)"; done;
+echo "\nTwo Thousand Five Hundred:"
+f_noprint "$(python3 args.py 2500)";
+echo "\nFive Thousand"
+f_noprint "$(python3 args.py 5000)";

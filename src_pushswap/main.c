@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 13:33:41 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 14:18:58 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	main(int argc, char **argv)
 
 	operations = NULL;
 	if (argc <= 1)
-		return (putstr("\n") > 0);
+		return (0);
 	program = program_get();
 	program->b = stack_from_argv(argc, argv);
 	program->count = program->b->size;
 	program->a = stack_create(program->count);
 	stack_normalize(program->a, program->b);
 	if (stack_issorted(program->a))
-		return (putstr("\n") > 0);
+		return (0);
 	operations = sort();
 	while (sort_reduce_operations(&operations))
 		;

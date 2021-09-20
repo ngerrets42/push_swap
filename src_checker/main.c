@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 12:52:41 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 13:07:42 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 14:46:03 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		putstr("OK!\n");
+		putstr("OK\n");
 		return (0);
 	}
 	program = program_get();
@@ -30,9 +30,9 @@ int	main(int argc, char **argv)
 	operations = checker_operations_get();
 	checker_operations_perform(operations);
 	if (stack_issorted(program->a) == 1 && program->b->top < 0)
-		putstr("OK!\n");
+		putstr("OK\n");
 	else
-		putstr("KO!\n");
+		putstr("KO\n");
 	program_free();
 	return (0);
 }

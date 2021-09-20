@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   nerror.h                                           :+:    :+:            */
+/*   has_alpha.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/09/08 11:24:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 15:39:23 by ngerrets      ########   odam.nl         */
+/*   Created: 2021/09/20 15:35:48 by ngerrets      #+#    #+#                 */
+/*   Updated: 2021/09/20 15:37:42 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NERROR_H
-# define NERROR_H
+#include "str.h"
 
-# include <stdlib.h>
-# include "str.h"
-
-typedef enum e_error
+int	has_alpha(char *str)
 {
-	ERR_MALLOC = 0,
-	ERR_GNL,
-	ERR_UNKNOWN_OPERATION,
-	ERR_STACK_SIZE_ZERO,
-	ERR_STACK_DUPVALUE,
-	ERR_STACK_NOT_SORTED,
-	ERR_VALUE_NO_SUBSTACK,
-	ERR_WRITE,
-	ERR_NOT_INT,
-	ERR_NOT_A_NUMBER,
-	ERR_DEFAULT
-}	t_error;
+	int	i;
 
-void	error(t_error err);
-
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z')
+			|| (str[i] >= 'A' && str[i] <= 'Z'))
+			return (1);
+		i++;
+	}
+	return (0);
+}

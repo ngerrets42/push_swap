@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:33:22 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 17:54:55 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 15:43:20 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,19 @@ static char	**ft_split_loop(char *ptr, char **res, char c)
 		word++;
 	}
 	return (res);
+}
+
+void	ft_split_clean(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 char	**ft_split(char const *str, char c)

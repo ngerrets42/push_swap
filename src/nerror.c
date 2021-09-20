@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 11:26:12 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 12:33:51 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 15:39:19 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	*err_get_msg(t_error err)
 		[ERR_VALUE_NO_SUBSTACK] = "Value doesn't fit in any substack.\n",
 		[ERR_WRITE] = "Write system-call failed!\n",
 		[ERR_NOT_INT] = "non-INT value detected!\n",
+		[ERR_NOT_A_NUMBER] = "One of the arguments isn't a number\n",
 		[ERR_DEFAULT] = "UNKNOWN ERROR\n"
 	};
 
