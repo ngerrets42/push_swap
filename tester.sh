@@ -6,7 +6,7 @@
 #    By: ngerrets <ngerrets@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/09/20 15:51:42 by ngerrets      #+#    #+#                  #
-#    Updated: 2021/09/20 17:09:13 by ngerrets      ########   odam.nl          #
+#    Updated: 2021/09/20 17:11:59 by ngerrets      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ f_noprint() {
 
 echo "42:	checker: count:	permutation:"
 echo "\nThree:"
-f "0 1 2 3 4"
 f "0 1 2"
 f "2 1 0"
 f "1 2 0"
