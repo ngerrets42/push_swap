@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 17:04:55 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 11:34:12 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 #include "operations.h"
 #include "ilist.h"
 #include "sort.h"
-
-// static void	stack_print(t_stack *stack)
-// {
-// 	int	i;
-
-// 	i = stack->top;
-// 	printf("------\n");
-// 	while (i >= 0)
-// 	{
-// 		printf("|%3d|\n", stack->numbers[i]);
-// 		i--;
-// 	}
-// 	printf("------\n");
-// }
 
 static void	operations_print(t_ilist *operations)
 {
@@ -41,7 +27,8 @@ static void	operations_print(t_ilist *operations)
 	while (operations != NULL)
 	{
 		op = (t_operation)operations->i;
-		//printf("%s\n", oplist[op]);
+		if (putstr(oplist[op]) < 0 || putstr("\n") < 0)
+			error(ERR_WRITE);
 		operations = operations->next;
 		i++;
 	}
@@ -55,25 +42,18 @@ int	main(int argc, char **argv)
 
 	operations = NULL;
 	if (argc <= 1)
-	{
-		printf("\n");
-		return (0);
-	}
+		return (putstr("\n") > 0);
 	program = program_get();
 	program->b = stack_from_argv(argc, argv);
 	program->count = program->b->size;
 	program->a = stack_create(program->count);
 	stack_normalize(program->a, program->b);
 	if (stack_issorted(program->a))
-		return (0);
+		return (putstr("\n") > 0);
 	operations = sort();
 	while (sort_reduce_operations(&operations))
 		;
-	//operations_print(operations);
-	//DEBUG
 	operations_print(operations);
-	//stack_print(program->a);
-	//stack_print(program->b);
 	if (!stack_issorted(program->a))
 		error(ERR_STACK_NOT_SORTED);
 	program_free();

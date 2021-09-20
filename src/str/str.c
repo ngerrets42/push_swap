@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/06 14:01:15 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 12:28:47 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 11:26:22 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,9 @@ char	*str_trim_spaces(char *str)
 	new_str[count] = '\0';
 	free(str);
 	return (new_str);
+}
+
+int	putstr(char *str)
+{
+	return (write(STDOUT_FILENO, str, ft_strlen(str) * sizeof(char)));
 }

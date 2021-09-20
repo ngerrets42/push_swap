@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 15:58:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 18:08:54 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 11:11:48 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "ilist.h"
 # include "operations.h"
-# include "nerror.h"
-# include "str.h"
 # include "../lib/get_next_line/get_next_line.h"
 # include "program.h"
 

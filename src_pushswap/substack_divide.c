@@ -6,18 +6,11 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/17 11:42:23 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 18:12:49 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 11:34:54 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "substack.h"
-
-static int	_check_available_quicksort(t_program *p, int value)
-{
-	if (p->a->size - p->a->top - 2 == value)
-		return (1);
-	return (0);
-}
 
 static void	_div_from_astack(t_program *p, t_ilist **ops, t_substack div,
 		t_substack sub[3])
