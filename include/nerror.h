@@ -6,12 +6,14 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 11:24:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 15:39:23 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 18:00:14 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NERROR_H
 # define NERROR_H
+
+# define SPECIFIC_ERROR 0
 
 # include <stdlib.h>
 # include "str.h"

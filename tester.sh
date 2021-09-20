@@ -35,13 +35,13 @@ f() {
 f_error() {
 	echo "	input: " "\""$1"\"";
 	echo "	push_swap: " | tr -d '\n';
-	./push_swap $1 | tr -d '\n';
+	./push_swap $1 2>&1 | tr -d '\n';
 	echo "";
 	echo "	checker: " | tr -d '\n';
-	./checker $1 | tr -d '\n';
+	./checker $1 2>&1 | tr -d '\n';
 	echo ""
 	echo "	checker_Mac: " | tr -d '\n';
-	./checker_Mac $1 | tr -d '\n';
+	./checker_Mac $1 2>&1 | tr -d '\n';
 	echo "\n";
 }
 

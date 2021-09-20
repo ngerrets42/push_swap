@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 15:58:21 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/08 18:10:20 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 18:01:49 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_operation	checker_op_from_str(char *str)
 			return (i);
 		i++;
 	}
+	error(ERR_UNKNOWN_OPERATION);
 	return (OP_COUNT);
 }
 
