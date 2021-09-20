@@ -6,7 +6,7 @@
 #    By: ngerrets <ngerrets@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/09/20 15:51:42 by ngerrets      #+#    #+#                  #
-#    Updated: 2021/09/20 17:11:59 by ngerrets      ########   odam.nl          #
+#    Updated: 2021/09/20 17:24:44 by ngerrets      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,10 +61,16 @@ f_noprint() {
 }
 
 echo "42:	checker: count:	permutation:"
+echo "\nTwo"
+f "0 1"
+f "1 0"
 echo "\nThree:"
 f "0 1 2"
 f "2 1 0"
 f "1 2 0"
+for i in {1..7}; do f "$(python3 args.py 3)"; done;
+echo "\nFour:"
+for i in {1..3}; do f "$(python3 args.py 4)"; done;
 echo "\nFive:"
 for i in {1..10}; do f "$(python3 args.py 5)"; done;
 echo "\nSix:"
