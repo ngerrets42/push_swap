@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/17 12:12:24 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 12:08:00 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/20 13:11:10 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@ static void	_move_away(t_program *p, t_ilist **ops, t_substack sub)
 		sort_perform_operation(p, ops, OP_PB);
 	else
 		sort_perform_operation(p, ops, OP_RA);
-}
-
-static void	_move_back(t_program *p, t_ilist **ops, t_substack sub)
-{
-	if (sub.stack_type == ST_A)
-		sort_perform_operation(p, ops, OP_PA);
-	else
-		sort_perform_operation(p, ops, OP_RRA);
 }
 
 static void	_swapa(t_program *p, t_ilist **ops)
@@ -56,7 +48,7 @@ static void	_three_from_c(t_program *p, t_ilist **ops, t_substack sub)
 		sort_perform_operation(p, ops, OP_PA);
 }
 
-static void	_sortback_three(t_program *p, t_ilist **ops, t_substack sub)
+void	_sortback_three(t_program *p, t_ilist **ops, t_substack sub)
 {
 	if (sub.stack_type == ST_C)
 		return (_three_from_c(p, ops, sub));
@@ -74,7 +66,12 @@ static void	_sortback_three(t_program *p, t_ilist **ops, t_substack sub)
 		&& stack_get_second(p->a) == sub.value_start + 1)
 		_swapa(p, ops);
 	if (stack_get_top(p->a) != sub.value_start)
-		_move_back(p, ops, sub);
+	{
+		if (sub.stack_type == ST_A)
+			sort_perform_operation(p, ops, OP_PA);
+		else
+			sort_perform_operation(p, ops, OP_RRA);
+	}
 }
 
 void	substack_sortback(t_program *p, t_ilist **ops, t_substack sub)
