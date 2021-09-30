@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 13:56:36 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 12:30:53 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:55:12 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	stack_rotate(t_stack *stack)
 	int	top_element;
 	int	i;
 
+	if (stack->top == -1)
+		return ;
 	top_element = stack->numbers[stack->top];
 	i = 0;
 	while (i < stack->top)

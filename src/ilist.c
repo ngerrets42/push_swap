@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 12:20:45 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/15 17:04:56 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 11:09:32 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ void	ilst_destroy_element(t_ilist *element)
 {
 	if (element)
 		free(element);
+}
+
+void	ilst_destroy(t_ilist *lst)
+{
+	t_ilist	*next;
+
+	while (lst != NULL)
+	{
+		next = lst->next;
+		free(lst);
+		lst = next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:41:32 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/30 10:43:59 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 11:15:41 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ static void	operations_print(t_ilist *operations)
 {
 	char		**oplist;
 	int			i;
+	t_ilist		*prev;
 	t_operation	op;
 
 	oplist = operation_list();
 	i = 0;
 	while (operations != NULL)
 	{
+		prev = operations;
 		op = (t_operation)operations->i;
 		if (putstr(oplist[op]) < 0 || putstr("\n") < 0)
 			error_exit(ERR_WRITE);
 		operations = operations->next;
+		free(prev);
 		i++;
 	}
 }

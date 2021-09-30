@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:42:07 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 13:20:15 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:58:59 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,15 @@ int	stack_get_top(t_stack *stack)
 
 int	stack_get_bottom(t_stack *stack)
 {
+	if (stack_issorted(stack))
+		return (-1);
 	return (stack->numbers[0]);
 }
 
 int	stack_get_second(t_stack *stack)
 {
+	if (stack->top <= 0)
+		return (-1);
 	return (stack->numbers[stack->top - 1]);
 }
 
