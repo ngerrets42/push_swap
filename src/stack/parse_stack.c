@@ -6,12 +6,13 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 15:44:51 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:48:28 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 #include "nerror.h"
+#include "program.h"
 
 static int	stack_lowest(t_stack *stack)
 {
@@ -64,20 +65,17 @@ t_stack	*_stack_construct(char **split, int i)
 	while (i >= 0)
 	{
 		n = ft_atol(split[i]);
-		if (ft_strlen(split[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT)
+		if (ft_strlen(split[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT
+			|| has_alpha(split[i]) || stack_find_value(stack, n) > -1)
 		{
+			if (has_alpha(split[i]))
+				error_display(ERR_NOT_A_NUMBER);
+			else if (stack_find_value(stack, n) > -1)
+				error_display(ERR_STACK_DUPVALUE);
+			else
+				error_display(ERR_NOT_INT);
 			ft_split_clean(split);
-			error(ERR_NOT_INT);
-		}
-		if (has_alpha(split[i]))
-		{
-			ft_split_clean(split);
-			error(ERR_NOT_A_NUMBER);
-		}
-		if (stack_find_value(stack, n) > -1)
-		{
-			ft_split_clean(split);
-			error(ERR_STACK_DUPVALUE);
+			program_exit(1);
 		}
 		free(split[i]);
 		stack_push(stack, n);
@@ -99,7 +97,8 @@ t_stack	*stack_from_line(char *line)
 	while (split[i] != NULL)
 		i++;
 	stack = _stack_construct(split, i - 1);
-	free(split);
+	if (split != NULL)
+		free(split);
 	return (stack);
 }
 
@@ -116,12 +115,12 @@ t_stack	*stack_from_argv(int argc, char **argv)
 	while (i > 0)
 	{
 		if (has_alpha(argv[i]))
-			error(ERR_NOT_A_NUMBER);
+			error_exit(ERR_NOT_A_NUMBER);
 		n = ft_atol(argv[i]);
 		if (ft_strlen(argv[i]) > INT_DIGITS || n > MAX_INT || n < MIN_INT)
-			error(ERR_NOT_INT);
+			error_exit(ERR_NOT_INT);
 		if (stack_find_value(stack, n) > -1)
-			error(ERR_STACK_DUPVALUE);
+			error_exit(ERR_STACK_DUPVALUE);
 		stack_push(stack, n);
 		i--;
 	}

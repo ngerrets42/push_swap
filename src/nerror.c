@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 11:26:12 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 17:37:03 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:47:54 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static void	_puterr(char *str)
 	write(STDERR_FILENO, str, ft_strlen(str) * sizeof(char));
 }
 
-void	error(t_error err)
+void	error_exit(t_error err)
 {
 	char	*err_msg;
 
-	if (SPECIFIC_ERROR)
+	if (ERROR_MSG)
 	{
 		err_msg = err_get_msg(err);
 		_puterr("Error\n- ");
@@ -52,4 +52,18 @@ void	error(t_error err)
 	else
 		_puterr("Error\n");
 	exit(1);
+}
+
+void	error_display(t_error err)
+{
+	char	*err_msg;
+
+	if (ERROR_MSG)
+	{
+		err_msg = err_get_msg(err);
+		_puterr("Error\n- ");
+		_puterr(err_msg);
+	}
+	else
+		_puterr("Error\n");
 }

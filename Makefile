@@ -6,7 +6,7 @@
 #    By: ngerrets <ngerrets@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/07/15 14:47:03 by ngerrets      #+#    #+#                  #
-#    Updated: 2021/09/20 18:02:57 by ngerrets      ########   odam.nl          #
+#    Updated: 2021/09/30 10:35:36 by ngerrets      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@
 NAME := push_swap
 CHECKER := checker
 
-COMPILE_FLAGS ?= -Wall -Wextra -Werror
-LINKING_FLAGS ?= -Llib/get_next_line -lgnl
+COMPILE_FLAGS ?= -Wall -Wextra -Werror -g -fsanitize=address
+LINKING_FLAGS ?= -Llib/get_next_line -lgnl -g -fsanitize=address
 LIBRARIES ?=
 SOURCE_DIRECTORY ?= src
 HEADER_DIRECTORY ?= include
@@ -36,8 +36,15 @@ OBJECTS := $(patsubst %,$(OBJECTS_DIRECTORY)/%,$(SOURCES:.c=.o))
 OBJECTS_CHECKER := $(patsubst %,$(OBJECTS_DIRECTORY)/%,$(SOURCES_CHECKER:.c=.o))
 NAME := $(BINARIES_DIRECTORY)/$(NAME)
 
+ifdef ERR_MSG
+	COMPILE_FLAGS += -DERROR_MSG=1
+endif
+
 # Default make-rule. Compile and link files.
 all: _pushswap _checker
+
+error:
+	$(MAKE) ERR_MSG=1 re
 
 _pushswap: $(NAME)
 

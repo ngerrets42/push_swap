@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/15 14:06:39 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 13:18:33 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:43:59 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ t_stack	*stack_create(int size)
 	t_stack	*stack;
 
 	if (size <= 0)
-		error(ERR_STACK_SIZE_ZERO);
+		error_exit(ERR_STACK_SIZE_ZERO);
 	stack = malloc(sizeof(t_stack));
 	if (stack == NULL)
-		error(ERR_MALLOC);
+		error_exit(ERR_MALLOC);
 	stack->size = size;
 	stack->top = -1;
 	stack->numbers = malloc(sizeof(int) * size);
 	if (stack->numbers == NULL)
 	{
 		free(stack);
-		error(ERR_MALLOC);
+		error_exit(ERR_MALLOC);
 	}
 	return (stack);
 }

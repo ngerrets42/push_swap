@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 15:58:21 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 18:01:49 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:43:59 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_operation	checker_op_from_str(char *str)
 			return (i);
 		i++;
 	}
-	error(ERR_UNKNOWN_OPERATION);
+	error_exit(ERR_UNKNOWN_OPERATION);
 	return (OP_COUNT);
 }
 
@@ -37,13 +37,13 @@ t_ilist	*checker_operation_next(void)
 
 	retv = get_next_line(0, &line);
 	if (retv == -1)
-		error(ERR_GNL);
+		error_exit(ERR_GNL);
 	if (line[0] == '\0')
 		return (NULL);
 	line = str_trim_spaces(line);
 	operation = checker_op_from_str(line);
 	if (operation == OP_COUNT)
-		error(ERR_UNKNOWN_OPERATION);
+		error_exit(ERR_UNKNOWN_OPERATION);
 	return (ilst_new(operation));
 }
 
@@ -80,7 +80,7 @@ void	checker_operations_perform(t_ilist *operations)
 	{
 		op = (t_operation)operations->i;
 		if (op >= OP_COUNT || op < 0)
-			error(ERR_UNKNOWN_OPERATION);
+			error_exit(ERR_UNKNOWN_OPERATION);
 		checker_operation_run(op);
 		operations = operations->next;
 	}

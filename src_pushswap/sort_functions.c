@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:17:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 12:13:54 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:43:59 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sort_perform_operation(t_program *p, t_ilist **ops, t_operation op)
 	func(p);
 	new = ilst_new(op);
 	if (new == NULL)
-		error(ERR_MALLOC);
+		error_exit(ERR_MALLOC);
 	ilst_add_back(ops, new);
 }
 

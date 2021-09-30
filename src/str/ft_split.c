@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 13:33:22 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/20 15:43:20 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:39:22 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_split_clean(char **split)
 	while (split[i] != NULL)
 	{
 		free(split[i]);
+		split[i] = NULL;
 		i++;
 	}
 	free(split);

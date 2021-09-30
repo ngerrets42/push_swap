@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:19:59 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/17 12:38:02 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:46:23 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_program	*program_alloc(void)
 
 	program = malloc(sizeof(t_program));
 	if (program == NULL)
-		error(ERR_MALLOC);
+		error_exit(ERR_MALLOC);
 	program->a = NULL;
 	program->b = NULL;
 	program->count = 0;
@@ -44,4 +44,10 @@ void	program_free(void)
 	if (program->b)
 		stack_destroy(program->b);
 	free(program);
+}
+
+void	program_exit(int exitcode)
+{
+	program_free();
+	exit(exitcode);
 }

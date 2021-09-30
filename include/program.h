@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:18:04 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/09 16:47:49 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/09/30 10:46:31 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ typedef struct s_program
 
 t_program	*program_get(void);
 void		program_free(void);
+void		program_exit(int exitcode);
 
 #endif
