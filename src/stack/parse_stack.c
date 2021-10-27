@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/30 11:20:09 by ngerrets      ########   odam.nl         */
+/*   Updated: 2021/10/27 15:42:29 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_stack	*_stack_construct(char **split, int i)
 			program_exit(1);
 		}
 		free(split[i]);
+		split[i] = NULL;
 		stack_push(stack, n);
 		i--;
 	}
