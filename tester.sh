@@ -93,6 +93,10 @@ echo "\nHundred:"
 for i in {1..10}; do f_noprint "$(python3 args.py 100)"; done;
 echo "\nFive hundred:"
 for i in {1..10}; do f_noprint "$(python3 args.py 500)"; done;
+echo "\nTesting INT_MAX:"
+f "1 2147483647 0"
+echo "\nTesting INT_MIN:"
+f "1 -2147483648 0"
 
 echo "\nERROR CHECK:\n"
 f_error "-835770774378 9 0"
