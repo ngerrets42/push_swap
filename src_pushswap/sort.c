@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/09 11:03:37 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/09/30 11:13:43 by ngerrets      ########   odam.nl         */
+/*   Updated: 2022/01/19 12:36:42 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	stack_check_three(int x[3], t_stack *stack)
 
 static void	sort_three(t_program *p, t_ilist **ops)
 {
-	if (p->count == 2 )
+	if (p->count == 2)
 		sort_perform_operation(p, ops, OP_SA);
 	else if (stack_check_three((int []){1, 2, 0}, p->a))
 		sort_perform_operation(p, ops, OP_RRA);

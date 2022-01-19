@@ -6,7 +6,7 @@
 /*   By: ngerrets <ngerrets@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/08 17:29:35 by ngerrets      #+#    #+#                 */
-/*   Updated: 2021/10/27 15:42:29 by ngerrets      ########   odam.nl         */
+/*   Updated: 2022/01/19 12:33:14 by ngerrets      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	stack_lowest(t_stack *stack)
 	int	lowest_i;
 
 	i = 0;
-	lowest_i = 0;
+	lowest_i = -1;
 	lowest_n = MAX_INT;
 	while (i <= stack->top)
 	{
@@ -48,6 +48,8 @@ void	stack_normalize(t_stack *a, t_stack *b)
 	while (i < a->size)
 	{
 		next_index = stack_lowest(b);
+		if (next_index == -1)
+			next_index = stack_find_value(b, MAX_INT);
 		b->numbers[next_index] = MAX_INT;
 		a->numbers[next_index] = i;
 		i++;
